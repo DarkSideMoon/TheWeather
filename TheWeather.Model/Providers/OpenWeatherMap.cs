@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using RestSharp;
+using TheWeather.Model.Builder;
 using TheWeather.Model.Entities;
+using TheWeather.Model.Extensions;
 using TheWeather.Model.Infrastructure;
 using TheWeather.Model.Interfaces;
 
@@ -27,38 +29,92 @@ namespace TheWeather.Model.Providers
 
         #region Implementation IWeather interface
 
-        public Task<Weather> GetWeatherAsync(string city)
+        public async Task<Weather> GetWeatherAsync(string city)
         {
-            throw new NotImplementedException();
+            string query = new UrlBuilder("data/2.5/weather")
+                .SetQueryParams(new
+                {
+                    q = city,
+                    appid = _weatherSettings.ApiKey
+                })
+                .Build();
+
+            return await _restClient.ExecuteByQuery<Weather>(query);
         }
 
-        public Task<Weather> GetWeatherAsync(string city, string language)
+        public async Task<Weather> GetWeatherAsync(string city, string language)
         {
-            throw new NotImplementedException();
+            string query = new UrlBuilder("data/2.5/weather")
+                .SetQueryParams(new
+                {
+                    q = city,
+                    appid = _weatherSettings.ApiKey,
+                    lang = language
+                })
+                .Build();
+
+            return await _restClient.ExecuteByQuery<Weather>(query);
         }
 
-        public Task<Weather> GetWeatherAsync(string city, string language, string unit)
+        public async Task<Weather> GetWeatherAsync(string city, string language, string unit)
         {
-            throw new NotImplementedException();
+            string query = new UrlBuilder("data/2.5/weather")
+                .SetQueryParams(new
+                {
+                    q = city,
+                    appid = _weatherSettings.ApiKey,
+                    lang = language,
+                    units = unit
+                })
+                .Build();
+
+            return await _restClient.ExecuteByQuery<Weather>(query);
         }
 
         #endregion
 
         #region Implementation IForecast interface
 
-        public Task<Forecast> GetForecastAsync(string city)
+        public async Task<Forecast> GetForecastAsync(string city)
         {
-            throw new NotImplementedException();
+            string query = new UrlBuilder("data/2.5/forecast")
+                .SetQueryParams(new
+                {
+                    q = city,
+                    appid = _weatherSettings.ApiKey
+                })
+                .Build();
+
+            return await _restClient.ExecuteByQuery<Forecast>(query);
         }
 
-        public Task<Forecast> GetForecastAsync(string city, string language)
+        public async Task<Forecast> GetForecastAsync(string city, string language)
         {
-            throw new NotImplementedException();
+            string query = new UrlBuilder("data/2.5/forecast")
+                .SetQueryParams(new
+                {
+                    q = city,
+                    appid = _weatherSettings.ApiKey,
+                    lang = language
+                })
+                .Build();
+
+            return await _restClient.ExecuteByQuery<Forecast>(query);
         }
 
-        public Task<Forecast> GetForecastAsync(string city, string language, string unit)
+        public async Task<Forecast> GetForecastAsync(string city, string language, string unit)
         {
-            throw new NotImplementedException();
+            string query = new UrlBuilder("data/2.5/forecast")
+                .SetQueryParams(new
+                {
+                    q = city,
+                    appid = _weatherSettings.ApiKey,
+                    lang = language,
+                    units = unit
+                })
+                .Build();
+
+            return await _restClient.ExecuteByQuery<Forecast>(query);
         }
 
         #endregion
