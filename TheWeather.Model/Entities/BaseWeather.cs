@@ -20,6 +20,6 @@ namespace TheWeather.Model.Entities
         public Wind Wind { get; set; }
 
         [JsonProperty("weather")]
-        public State State { get; set; }
+        public IEnumerable<State> State { get; set; }
     }
 }
