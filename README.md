@@ -6,4 +6,4 @@
 
 | OS  | Status |
 | ------------- | ------------- |
-| Windows win10-x64  | |
+| Windows win10-x64  | [![Build status](https://ci.appveyor.com/api/projects/status/kadq17fpq08y0twq?svg=true)](https://ci.appveyor.com/project/Greenwood/theweather) |
