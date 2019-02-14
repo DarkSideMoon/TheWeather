@@ -9,7 +9,7 @@ namespace TheWeather.Api.ViewModel
     public class ErrorViewModel
     {
         [JsonProperty("info")]
-        public string Information { get; set; } = "Sorry, an error occurred. Try again later. Thank you for using our service";
+        public string Information { get; set; }
 
         [JsonProperty("actionName")]
         public string ActionName { get; set; }

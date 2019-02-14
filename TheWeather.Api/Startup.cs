@@ -35,6 +35,15 @@ namespace TheWeather.Api
             // Registers health checks services
             services.AddHealthChecks();
 
+            // Add CORS
+            services.AddCors(options => options.AddPolicy("Cors",
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                }));
+
             services.Configure<WeatherSettings>(options => Configuration.GetSection("WeatherSettings").Bind(options));
 
             // Add own services
@@ -59,6 +68,8 @@ namespace TheWeather.Api
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            app.UseCors("Cors");
 
             app.UseHealthChecks("/health");
 

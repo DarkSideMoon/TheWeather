@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using TheWeather.Model.Entities;
+using TheWeather.Model.Exceptions;
 
 namespace TheWeather.Model.Extensions
 {
@@ -17,7 +18,15 @@ namespace TheWeather.Model.Extensions
             try
             {
                 IRestResponse<T> response = await restClient.ExecuteTaskAsync<T>(request);
-                return JsonConvert.DeserializeObject<T>(response.Content);
+
+                if (response.IsSuccessful)
+                    return JsonConvert.DeserializeObject<T>(response.Content);
+
+                throw new CityNotFoundException();
+            }
+            catch (CityNotFoundException cityNotFoundException)
+            {
+                throw cityNotFoundException;
             }
             catch (Exception ex)
             {

@@ -7,3 +7,7 @@
 | OS  | Status |
 | ------------- | ------------- |
 | Windows win10-x64  | [![Build status](https://ci.appveyor.com/api/projects/status/kadq17fpq08y0twq?svg=true)](https://ci.appveyor.com/project/Greenwood/theweather) |
+
+| Service  | Code quality |
+| ------------- | ------------- |
+| codacy |[![Codacy Badge](https://api.codacy.com/project/badge/Grade/72555012b62b464b843aa02d764e22ca)](https://www.codacy.com/app/DarkSideMoon/TheWeather?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DarkSideMoon/TheWeather&amp;utm_campaign=Badge_Grade)|

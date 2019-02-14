@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using TheWeather.Api.Filters;
@@ -13,6 +14,7 @@ namespace TheWeather.Api.Controllers
     /// <summary>
     /// Forecast сontroller
     /// </summary>
+    [EnableCors("Cors")]
     [Produces("application/json")]
     [Route("api/[controller]")]
     public class ForecastController : Controller
@@ -43,8 +45,8 @@ namespace TheWeather.Api.Controllers
         [ProducesResponseType(typeof(Forecast), 200)]
         public async Task<IActionResult> Get(string city, string language = "en", string unit = "metric")
         {
-            var movies = await _weatherService.GetForecastAsync(city, language, unit);
-            return Ok(movies);
+            var forecast = await _weatherService.GetForecastAsync(city, language, unit);
+            return Ok(forecast);
         }
     }
 }
