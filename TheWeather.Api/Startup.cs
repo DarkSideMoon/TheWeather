@@ -30,10 +30,10 @@ namespace TheWeather.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(); //.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // Registers health checks services
-            services.AddHealthChecks();
+            //services.AddHealthChecks();
 
             // Add CORS
             services.AddCors(options => options.AddPolicy("Cors",
@@ -66,12 +66,14 @@ namespace TheWeather.Api
                 app.UseHsts();
             }
 
+            app.UseDeveloperExceptionPage();
+
             app.UseHttpsRedirection();
             app.UseMvc();
 
             app.UseCors("Cors");
 
-            app.UseHealthChecks("/health");
+            //app.UseHealthChecks("/health");
 
             // Configure swagger
             ConfigureSwaggerApplication(app);
