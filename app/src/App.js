@@ -27,11 +27,12 @@ class App extends React.Component {
     const city = e.target.elements.city.value;
     const language = e.target.elements.language.value;
     const unit = e.target.elements.unit.value;
+    const api = "https://theweatherapitest.azurewebsites.net/api"
 
-    const apiCallForecast = await fetch(`http://theweatherapitest.azurewebsites.net/api/Forecast?city=${city}&language=${language}&unit=${unit}`);    
+    const apiCallForecast = await fetch(`${api}/Forecast?city=${city}&language=${language}&unit=${unit}`);    
     const dataForecast = await apiCallForecast.json();
 
-    const apiCallWeather = await fetch(`http://theweatherapitest.azurewebsites.net/api/Weather?city=${city}&language=${language}&unit=${unit}`);    
+    const apiCallWeather = await fetch(`${api}/Weather?city=${city}&language=${language}&unit=${unit}`);    
     const data = await apiCallWeather.json();
 
     if (apiCallWeather.status === 200) {
