@@ -34,7 +34,7 @@ namespace TheWeather.Api.Controllers
         }
 
         /// <summary>
-        /// Get forecast weather
+        /// Get forecast weather for 5 days
         /// </summary>
         /// <param name="city"></param>
         /// <param name="language"></param>
@@ -42,10 +42,10 @@ namespace TheWeather.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [CustomExceptionFilter]
-        [ProducesResponseType(typeof(Forecast), 200)]
+        [ProducesResponseType(typeof(IEnumerable<ForecastWeather>), 200)]
         public async Task<IActionResult> Get(string city, string language = "en", string unit = "metric")
         {
-            var forecast = await _weatherService.GetForecastAsync(city, language, unit);
+            var forecast = await _weatherService.GetWeekForecastAsync(city, language, unit);
             return Ok(forecast);
         }
     }

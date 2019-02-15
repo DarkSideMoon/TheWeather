@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RestSharp;
@@ -115,6 +116,18 @@ namespace TheWeather.Model.Providers
                 .Build();
 
             return await _restClient.ExecuteByQuery<Forecast>(query);
+        }
+
+        public async Task<IEnumerable<ForecastWeather>> GetWeekForecastAsync(string city, string language, string unit)
+        {
+            var allForecast = await GetForecastAsync(city, language, unit);
+
+            var weekForectas = allForecast.Forecasts
+                .GroupBy(x => x.DayOfWeek)
+                .Select(g => g.OrderByDescending(x => x.DateTime).FirstOrDefault())
+                .ToList();
+
+            return weekForectas;
         }
 
         #endregion
