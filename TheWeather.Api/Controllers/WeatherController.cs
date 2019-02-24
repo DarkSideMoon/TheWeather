@@ -9,6 +9,7 @@ using TheWeather.Model.Interfaces;
 using TheWeather.Model.Providers;
 using Microsoft.Extensions.DependencyInjection;
 using TheWeather.Api.Filters;
+using TheWeather.Api.ViewModel;
 using TheWeather.Model.Entities;
 
 namespace TheWeather.Api.Controllers
@@ -35,19 +36,20 @@ namespace TheWeather.Api.Controllers
             _weatherService = serviceProvider.GetService<IClient>();
         }
 
+
         /// <summary>
         /// Get weather
         /// </summary>
-        /// <param name="city"></param>
-        /// <param name="language"></param>
-        /// <param name="unit"></param>
+        /// <param name="weatherViewModel"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
+        [ValidateModelState]
         [CustomExceptionFilter]
         [ProducesResponseType(typeof(Weather), 200)]
-        public async Task<IActionResult> Get(string city, string language = "en", string unit = "metric")
+        public async Task<IActionResult> Get([FromBody] WeatherViewModel weatherViewModel)
         {
-            var weather = await _weatherService.GetWeatherAsync(city, language, unit);
+            var weather = 
+                await _weatherService.GetWeatherAsync(weatherViewModel.City, weatherViewModel.Language, weatherViewModel.Unit);
             return Ok(weather);
         }
     }

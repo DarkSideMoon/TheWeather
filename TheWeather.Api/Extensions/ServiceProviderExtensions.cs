@@ -19,7 +19,7 @@ namespace TheWeather.Api.Extensions
         /// Add movie client service through DI
         /// </summary>
         /// <param name="services"></param>
-        public static void AddMovieClientService(this IServiceCollection services, IConfiguration Configuration)
+        public static void AddWeatherClientService(this IServiceCollection services, IConfiguration Configuration)
         {
             var weatherSettings = Configuration.GetSection("WeatherSettings").Get<WeatherSettings>();
 

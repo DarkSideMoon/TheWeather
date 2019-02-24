@@ -37,6 +37,17 @@ namespace TheWeather.Api.Filters
                     StatusCode = Microsoft.AspNetCore.Http.StatusCodes.Status404NotFound,
                 };
             }
+            else if (context.Exception.GetType() == typeof(ResponseStatusException))
+            {
+                var responseStatusException = (ResponseStatusException)context.Exception;
+                error.Information = responseStatusException.Message;
+                context.Result = new ContentResult
+                {
+                    Content = error.BuildJson(),
+                    ContentType = "application/json",
+                    StatusCode = (int)responseStatusException.StatusCode,
+                };
+            }
             else
             {
                 error.Information = "Sorry, an error occurred. Try again later. Thank you for using our service";

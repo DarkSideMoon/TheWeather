@@ -47,7 +47,7 @@ namespace TheWeather.Api
             services.Configure<WeatherSettings>(options => Configuration.GetSection("WeatherSettings").Bind(options));
 
             // Add own services
-            services.AddMovieClientService(Configuration);
+            services.AddWeatherClientService(Configuration);
 
             // Configure swagger
             ConfigureSwaggerService(services);

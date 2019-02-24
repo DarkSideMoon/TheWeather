@@ -15,5 +15,20 @@ namespace TheWeather.Model.Infrastructure
         /// Base url of api openweathermap
         /// </summary>
         public string BaseUrl { get; set; }
+
+        /// <summary>
+        /// Version of API
+        /// </summary>
+        public string ApiVersion { get; set; }
+
+        /// <summary>
+        /// Endpoint url for forecast
+        /// </summary>
+        public string ForecastUrl { get; set; }
+
+        /// <summary>
+        /// Endpoint url for weather
+        /// </summary>
+        public string WeatherUrl { get; set; }
     }
 }

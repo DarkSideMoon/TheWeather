@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -20,13 +21,20 @@ namespace TheWeather.Model.Extensions
                 IRestResponse<T> response = await restClient.ExecuteTaskAsync<T>(request);
 
                 if (response.IsSuccessful)
-                    return JsonConvert.DeserializeObject<T>(response.Content);
+                    return await Task.Run(() => JsonConvert.DeserializeObject<T>(response.Content));
 
-                throw new CityNotFoundException();
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                    throw new CityNotFoundException();
+
+                throw new ResponseStatusException(response.StatusDescription, response.StatusCode);
             }
             catch (CityNotFoundException cityNotFoundException)
             {
                 throw cityNotFoundException;
+            }
+            catch (ResponseStatusException responseStatusException)
+            {
+                throw responseStatusException;
             }
             catch (Exception ex)
             {

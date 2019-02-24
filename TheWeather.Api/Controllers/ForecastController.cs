@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using TheWeather.Api.Filters;
+using TheWeather.Api.ViewModel;
 using TheWeather.Model.Entities;
 using TheWeather.Model.Interfaces;
 
@@ -36,16 +37,16 @@ namespace TheWeather.Api.Controllers
         /// <summary>
         /// Get forecast weather for 5 days
         /// </summary>
-        /// <param name="city"></param>
-        /// <param name="language"></param>
-        /// <param name="unit"></param>
+        /// <param name="forecastViewModel"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
+        [ValidateModelState]
         [CustomExceptionFilter]
         [ProducesResponseType(typeof(IEnumerable<ForecastWeather>), 200)]
-        public async Task<IActionResult> Get(string city, string language = "en", string unit = "metric")
+        public async Task<IActionResult> Get([FromBody] ForecastViewModel forecastViewModel)
         {
-            var forecast = await _weatherService.GetWeekForecastAsync(city, language, unit);
+            var forecast = 
+                await _weatherService.GetWeekForecastAsync(forecastViewModel.City, forecastViewModel.Language, forecastViewModel.Unit);
             return Ok(forecast);
         }
     }

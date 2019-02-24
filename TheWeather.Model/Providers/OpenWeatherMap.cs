@@ -25,14 +25,14 @@ namespace TheWeather.Model.Providers
         {
             _weatherSettings = weatherSettings;
 
-            _restClient = new RestClient(_weatherSettings.BaseUrl);
+            _restClient = new RestClient(_weatherSettings.BaseUrl + _weatherSettings.ApiVersion);
         }
 
         #region Implementation IWeather interface
 
         public async Task<Weather> GetWeatherAsync(string city)
         {
-            string query = new UrlBuilder("data/2.5/weather")
+            string query = new UrlBuilder(_weatherSettings.WeatherUrl)
                 .SetQueryParams(new
                 {
                     q = city,
@@ -45,7 +45,7 @@ namespace TheWeather.Model.Providers
 
         public async Task<Weather> GetWeatherAsync(string city, string language)
         {
-            string query = new UrlBuilder("data/2.5/weather")
+            string query = new UrlBuilder(_weatherSettings.WeatherUrl)
                 .SetQueryParams(new
                 {
                     q = city,
@@ -59,7 +59,7 @@ namespace TheWeather.Model.Providers
 
         public async Task<Weather> GetWeatherAsync(string city, string language, string unit)
         {
-            string query = new UrlBuilder("data/2.5/weather")
+            string query = new UrlBuilder(_weatherSettings.WeatherUrl)
                 .SetQueryParams(new
                 {
                     q = city,
@@ -78,7 +78,7 @@ namespace TheWeather.Model.Providers
 
         public async Task<Forecast> GetForecastAsync(string city)
         {
-            string query = new UrlBuilder("data/2.5/forecast")
+            string query = new UrlBuilder(_weatherSettings.ForecastUrl)
                 .SetQueryParams(new
                 {
                     q = city,
@@ -91,7 +91,7 @@ namespace TheWeather.Model.Providers
 
         public async Task<Forecast> GetForecastAsync(string city, string language)
         {
-            string query = new UrlBuilder("data/2.5/forecast")
+            string query = new UrlBuilder(_weatherSettings.ForecastUrl)
                 .SetQueryParams(new
                 {
                     q = city,
@@ -105,7 +105,7 @@ namespace TheWeather.Model.Providers
 
         public async Task<Forecast> GetForecastAsync(string city, string language, string unit)
         {
-            string query = new UrlBuilder("data/2.5/forecast")
+            string query = new UrlBuilder(_weatherSettings.ForecastUrl)
                 .SetQueryParams(new
                 {
                     q = city,
