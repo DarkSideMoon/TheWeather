@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 using TheWeather.Api.Filters;
-using TheWeather.Api.ViewModel;
+using TheWeather.Api.Request;
 using TheWeather.Model.Entities;
 using TheWeather.Model.Interfaces;
 
@@ -15,10 +12,10 @@ namespace TheWeather.Api.Controllers
     /// <summary>
     /// Forecast сontroller
     /// </summary>
-    [EnableCors("Cors")]
-    [Produces("application/json")]
-    [Route("api/[controller]")]
-    public class ForecastController : Controller
+    [ApiController]
+    [Route("forecast")]
+    [Produces(MediaTypeNames.Application.Json)]
+    public class ForecastController : ControllerBase
     {
         /// <summary>
         /// Weather service
@@ -28,10 +25,10 @@ namespace TheWeather.Api.Controllers
         /// <summary>
         /// Forecast
         /// </summary>
-        /// <param name="serviceProvider"></param>
-        public ForecastController(IServiceProvider serviceProvider)
+        /// <param name="weatherService"></param>
+        public ForecastController(IClient weatherService)
         {
-            _weatherService = serviceProvider.GetService<IClient>();
+            _weatherService = weatherService;
         }
 
         /// <summary>
@@ -41,9 +38,8 @@ namespace TheWeather.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateModelState]
-        [CustomExceptionFilter]
         [ProducesResponseType(typeof(IEnumerable<ForecastWeather>), 200)]
-        public async Task<IActionResult> Get([FromBody] ForecastViewModel forecastViewModel)
+        public async Task<IActionResult> Get([FromBody] ForecastRequest forecastViewModel)
         {
             var forecast = 
                 await _weatherService.GetWeekForecastAsync(forecastViewModel.City, forecastViewModel.Language, forecastViewModel.Unit);

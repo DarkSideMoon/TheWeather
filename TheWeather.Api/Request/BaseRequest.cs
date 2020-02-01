@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace TheWeather.Api.ViewModel
+namespace TheWeather.Api.Request
 {
     /// <summary>
     /// Base data of view model
     /// </summary>
-    public class BaseDataViewModel
+    public class BaseRequest
     {
         /// <summary>
         /// City of weather
