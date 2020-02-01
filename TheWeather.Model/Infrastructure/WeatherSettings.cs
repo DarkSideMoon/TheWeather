@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TheWeather.Model.Infrastructure
+﻿namespace TheWeather.Model.Infrastructure
 {
     public class WeatherSettings
     {

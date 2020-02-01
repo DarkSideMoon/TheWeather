@@ -1,12 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  
+
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="RestSharp" Version="106.6.7" />
+    <ProjectReference Include="..\TheWeather.Model\TheWeather.Model.csproj" />
   </ItemGroup>
 
 </Project>
