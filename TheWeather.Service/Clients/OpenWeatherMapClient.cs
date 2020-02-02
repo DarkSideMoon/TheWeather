@@ -25,7 +25,7 @@ namespace TheWeather.Service.Clients
 
         public async Task<Weather> GetWeatherAsync(string city, string language, string unit)
         {
-            var weatherUrl = $"{_weatherSettings.BaseUrl}/{_weatherSettings.ApiVersion}/{_weatherSettings.WeatherUrl}/";
+            var weatherUrl = $"{_weatherSettings.BaseUrl}/{_weatherSettings.ApiVersion}/{_weatherSettings.WeatherUrl}";
             var query = new UrlBuilder(weatherUrl)
                 .SetAppId(_weatherSettings.ApiKey)
                 .SetCity(city)
@@ -38,7 +38,7 @@ namespace TheWeather.Service.Clients
 
         public async Task<Forecast> GetForecastAsync(string city, string language, string unit)
         {
-            var forecastUrl = $"{_weatherSettings.BaseUrl}/{_weatherSettings.ApiVersion}/{_weatherSettings.ForecastUrl}/";
+            var forecastUrl = $"{_weatherSettings.BaseUrl}/{_weatherSettings.ApiVersion}/{_weatherSettings.ForecastUrl}";
             var query = new UrlBuilder(forecastUrl)
                 .SetAppId(_weatherSettings.ApiKey)
                 .SetCity(city)
