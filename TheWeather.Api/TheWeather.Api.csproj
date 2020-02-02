@@ -20,6 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TheWeather.Model\TheWeather.Model.csproj" />
+    <ProjectReference Include="..\TheWeather.Service\TheWeather.Service.csproj" />
   </ItemGroup>
 </Project>

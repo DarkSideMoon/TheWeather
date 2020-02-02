@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
 
 namespace TheWeather.Model.Exceptions
 {
@@ -9,15 +7,15 @@ namespace TheWeather.Model.Exceptions
     /// Custom exception with status code
     /// </summary>
     [Serializable]
-    public class ResponseStatusException : Exception
+    public class WeatherClientException : Exception
     {
         public HttpStatusCode StatusCode { get; set; }
 
-        public ResponseStatusException()
+        public WeatherClientException()
         {
         }
 
-        public ResponseStatusException(string name, HttpStatusCode statusCode)
+        public WeatherClientException(string name, HttpStatusCode statusCode)
             : base(name)
         {
             StatusCode = statusCode;

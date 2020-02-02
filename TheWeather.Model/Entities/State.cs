@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace TheWeather.Model.Entities
 {
@@ -14,7 +11,6 @@ namespace TheWeather.Model.Entities
         public string Description { get; set; }
 
         private string _icon;
-
         [JsonProperty("icon")]
         public string Icon
         {

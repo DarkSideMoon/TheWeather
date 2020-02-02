@@ -1,14 +1,18 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Serilog;
 using TheWeather.Api.Infrastructure;
 using TheWeather.Api.Middleware;
+using TheWeather.Model.Common;
 using TheWeather.Model.Infrastructure;
 
 namespace TheWeather.Api
 {
     public class Startup
     {
+        private readonly static string AppStartedLog = "App {0} has been started";
         private readonly static string HealthEndpoint = "/health";
         private readonly static string WeatherSettings = "WeatherSettings";
 
@@ -24,9 +28,13 @@ namespace TheWeather.Api
         {
             services.AddControllers();
 
+            // Registers health checks services
             services.AddHealthChecks();
 
-            services.Configure<WeatherSettings>(options => Configuration.GetSection(WeatherSettings).Bind(options));
+            // Add http client service
+            services.AddHttpClientService();
+
+            services.AddSingleton(options => Configuration.GetSection(WeatherSettings).Get<WeatherSettings>());
 
             // Add own services
             services.AddWeatherClientService();
@@ -36,7 +44,7 @@ namespace TheWeather.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IHostApplicationLifetime applicationLifetime)
         {
             app.UseHttpsRedirection();
 
@@ -53,6 +61,11 @@ namespace TheWeather.Api
 
             // Configure swagger
             app.AddSwagger();
+
+            applicationLifetime.ApplicationStarted.Register(() =>
+            {
+                Log.Information(string.Format(AppStartedLog, Constants.App.Name));
+            });
         }
     }
 }

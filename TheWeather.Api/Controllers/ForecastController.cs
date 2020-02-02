@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using TheWeather.Api.Filters;
 using TheWeather.Api.Request;
 using TheWeather.Model.Entities;
-using TheWeather.Model.Interfaces;
+using TheWeather.Service.Service;
 
 namespace TheWeather.Api.Controllers
 {
@@ -20,15 +20,15 @@ namespace TheWeather.Api.Controllers
         /// <summary>
         /// Weather service
         /// </summary>
-        private readonly IClient _weatherService;
+        private readonly IWeatherClient _weatherClient;
 
         /// <summary>
         /// Forecast
         /// </summary>
-        /// <param name="weatherService"></param>
-        public ForecastController(IClient weatherService)
+        /// <param name="weatherClient"></param>
+        public ForecastController(IWeatherClient weatherClient)
         {
-            _weatherService = weatherService;
+            _weatherClient = weatherClient;
         }
 
         /// <summary>
@@ -36,13 +36,13 @@ namespace TheWeather.Api.Controllers
         /// </summary>
         /// <param name="forecastViewModel"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [ValidateModelState]
         [ProducesResponseType(typeof(IEnumerable<ForecastWeather>), 200)]
-        public async Task<IActionResult> Get([FromBody] ForecastRequest forecastViewModel)
+        public async Task<IActionResult> Get([FromQuery] ForecastRequest forecastViewModel)
         {
             var forecast = 
-                await _weatherService.GetWeekForecastAsync(forecastViewModel.City, forecastViewModel.Language, forecastViewModel.Unit);
+                await _weatherClient.GetWeekForecastAsync(forecastViewModel.City, forecastViewModel.Language, forecastViewModel.Unit);
             return Ok(forecast);
         }
     }

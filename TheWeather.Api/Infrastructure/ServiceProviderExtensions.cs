@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using TheWeather.Model.Interfaces;
-using TheWeather.Model.Providers;
+using TheWeather.Service.Clients;
+using TheWeather.Service.Service;
 
 namespace TheWeather.Api.Infrastructure
 {
@@ -15,7 +15,7 @@ namespace TheWeather.Api.Infrastructure
         /// <param name="services"></param>
         public static void AddWeatherClientService(this IServiceCollection services)
         {
-            services.AddTransient<IClient, OpenWeatherMap>();
+            services.AddTransient<IWeatherClient, OpenWeatherMapClient>();
         }
     }
 }

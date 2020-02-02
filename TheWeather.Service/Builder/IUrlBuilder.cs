@@ -4,6 +4,8 @@
     {
         IUrlBuilder SetAppId(string apiKey);
 
+        IUrlBuilder SetCity(string city);
+
         IUrlBuilder SetLanguage(string language);
 
         IUrlBuilder SetUnit(string unit);

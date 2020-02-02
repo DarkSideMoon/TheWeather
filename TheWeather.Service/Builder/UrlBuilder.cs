@@ -27,6 +27,12 @@ namespace TheWeather.Service.Builder
             return this;
         }
 
+        public IUrlBuilder SetCity(string city)
+        {
+            _queryParams.Add(Constants.Weather.City, city);
+            return this;
+        }
+
         public IUrlBuilder SetLanguage(string language)
         {
             _queryParams.Add(Constants.Weather.Language, language);
@@ -61,6 +67,9 @@ namespace TheWeather.Service.Builder
             _urlBuilder.Append("?");
             foreach (var queryParam in _queryParams)
             {
+                if (string.IsNullOrEmpty(queryParam.Value))
+                    continue;
+
                 string query = $"{queryParam.Key}={queryParam.Value}";
 
                 if (_queryParams.LastOrDefault().Key != queryParam.Key)
