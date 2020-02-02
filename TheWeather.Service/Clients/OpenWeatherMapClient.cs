@@ -8,7 +8,7 @@ using TheWeather.Model.Entities;
 using TheWeather.Model.Exceptions;
 using TheWeather.Model.Infrastructure;
 using TheWeather.Service.Builder;
-using TheWeather.Service.Service;
+using TheWeather.Service.Service;   
 
 namespace TheWeather.Service.Clients
 {
@@ -33,7 +33,7 @@ namespace TheWeather.Service.Clients
                 .SetUnit(unit)
                 .Build();
 
-            return await ExecuteRequest<Weather>(query);
+            return await ExecuteRequest<Weather>(query).ConfigureAwait(false);
         }
 
         public async Task<Forecast> GetForecastAsync(string city, string language, string unit)
@@ -46,12 +46,12 @@ namespace TheWeather.Service.Clients
                 .SetUnit(unit)
                 .Build();
 
-            return await ExecuteRequest<Forecast>(query);
+            return await ExecuteRequest<Forecast>(query).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<ForecastWeather>> GetWeekForecastAsync(string city, string language, string unit)
         {
-            var allForecast = await GetForecastAsync(city, language, unit);
+            var allForecast = await GetForecastAsync(city, language, unit).ConfigureAwait(false);
 
             return allForecast.Forecasts
                 .GroupBy(x => x.DayOfWeek)
