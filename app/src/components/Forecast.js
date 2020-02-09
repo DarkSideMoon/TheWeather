@@ -14,7 +14,7 @@ const Forecast = props => {
 					<p className="weather-data weather-data-day" >{ el.dayOfWeek}</p>
 					<p className="weather-data">{ el.main.temp }</p>
 					<p className="weather-data"> { el.weather[0].description }</p>
-					<img src={el.weather[0].icon} className="weather-data_img"/>
+					<img src={el.weather[0].icon} className="weather-data_img" alt="Forecast"/>
 				</div>	
 			);
 			}
