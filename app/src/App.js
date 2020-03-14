@@ -27,7 +27,7 @@ class App extends React.Component {
     const city = e.target.elements.city.value;
     const language = e.target.elements.language.value;
     const unit = e.target.elements.unit.value;
-    const api = "https://theweatherapitest.azurewebsites.net/api"
+    const api = "http://localhost:5000"
 
     const apiCallForecast = await fetch(`${api}/Forecast?city=${city}&language=${language}&unit=${unit}`);    
     const dataForecast = await apiCallForecast.json();
@@ -40,11 +40,11 @@ class App extends React.Component {
         city: data.name,
         visibility: data.visibility,
         dateTime: data.dateTime,
-        temp: data.main.temp,
+        temp: data.main.temperature,
         pressure: data.main.pressure,
         humidity: data.main.humidity,
-        description: data.weather[0].description,
-        icon: data.weather[0].icon,
+        description: data.state[0].description,
+        icon: data.state[0].icon,
         forecastList: dataForecast,
         error: ""
       });

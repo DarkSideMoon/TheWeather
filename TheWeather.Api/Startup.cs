@@ -27,6 +27,7 @@ namespace TheWeather.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors();
 
             // Registers health checks services
             services.AddHealthChecks();
@@ -53,6 +54,8 @@ namespace TheWeather.Api
             app.UseHealthChecks(HealthEndpoint);
 
             app.UseRouting();
+
+            app.UseCors(c => c.AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {

@@ -12,9 +12,9 @@ const Forecast = props => {
 			return(
 				<div className="weather-container">
 					<p className="weather-data weather-data-day" >{ el.dayOfWeek}</p>
-					<p className="weather-data">{ el.main.temp }</p>
-					<p className="weather-data"> { el.weather[0].description }</p>
-					<img src={el.weather[0].icon} className="weather-data_img" alt="Forecast"/>
+					<p className="weather-data">{ el.main.temperature }</p>
+					<p className="weather-data"> { el.state[0].description }</p>
+					<img src={el.state[0].icon} className="weather-data_img" alt="Forecast"/>
 				</div>	
 			);
 			}
