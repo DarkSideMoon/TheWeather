@@ -13,9 +13,10 @@ namespace TheWeather.Api.Infrastructure
         /// Add movie client service through DI
         /// </summary>
         /// <param name="services"></param>
-        public static void AddWeatherClientService(this IServiceCollection services)
+        public static IServiceCollection AddWeatherClientService(this IServiceCollection services)
         {
             services.AddTransient<IWeatherClient, OpenWeatherMapClient>();
+            return services;
         }
     }
 }

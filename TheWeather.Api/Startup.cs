@@ -31,13 +31,13 @@ namespace TheWeather.Api
             // Registers health checks services
             services.AddHealthChecks();
 
-            // Add http client service
-            services.AddHttpClientService();
-
             services.AddSingleton(options => Configuration.GetSection(WeatherSettings).Get<WeatherSettings>());
 
             // Add own services
             services.AddWeatherClientService();
+
+            // Add http client service
+            services.AddHttpClientService();
 
             // Configure swagger
             services.AddSwaggerService();
