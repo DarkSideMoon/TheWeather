@@ -62,15 +62,21 @@ namespace TheWeather.Service.Clients
         private async Task<TResult> ExecuteRequest<TResult>(string query)
         {
             var responseMessage = await _httpClient.GetAsync(query);
+            try
+            {
+                if (responseMessage.StatusCode == HttpStatusCode.NotFound)
+                    throw new CityNotFoundException();
 
-            if (responseMessage.StatusCode == HttpStatusCode.NotFound)
-                throw new CityNotFoundException();
+                if (!responseMessage.IsSuccessStatusCode)
+                    throw new WeatherClientException();
 
-            if (!responseMessage.IsSuccessStatusCode)
-                throw new WeatherClientException();
-
-            var response = await responseMessage.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<TResult>(response);
+                var response = await responseMessage.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<TResult>(response);
+            }
+            finally
+            {
+                responseMessage.Dispose();
+            }
         }
     }
 }
