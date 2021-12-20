@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheWeather.Model", "TheWeather.Model\TheWeather.Model.csproj", "{60FA1A06-A322-49BA-B40F-E69872DF1882}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheWeather.Model", "src\TheWeather.Model\TheWeather.Model.csproj", "{60FA1A06-A322-49BA-B40F-E69872DF1882}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheWeather.Api", "TheWeather.Api\TheWeather.Api.csproj", "{0D4CE5E5-D6C9-4DFA-A139-CBBF1D35D058}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheWeather.Api", "src\TheWeather.Api\TheWeather.Api.csproj", "{0D4CE5E5-D6C9-4DFA-A139-CBBF1D35D058}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheWeather.Service", "TheWeather.Service\TheWeather.Service.csproj", "{0F391074-065F-454F-AAD6-D18CAADD532E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheWeather.Service", "src\TheWeather.Service\TheWeather.Service.csproj", "{0F391074-065F-454F-AAD6-D18CAADD532E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

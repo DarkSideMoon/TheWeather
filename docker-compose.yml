@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  weather-backend-app:
+    build: 
+      context: .
+      dockerfile: src/TheWeather.Api/Dockerfile
+    ports:
+      - "5000:80"
+
+  weather-frontend-app:
+    build:
+      context: ./src/app/Dockerfile
+    ports:
+     - "5001:80"
+    environment:
+      - "Endpoints:Backend=http://weather-backend-app:80"
+    depends_on:
+      - weather-backend-app
