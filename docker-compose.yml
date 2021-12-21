@@ -6,14 +6,15 @@ services:
       context: .
       dockerfile: src/TheWeather.Api/Dockerfile
     ports:
-      - "5000:80"
+      - "80:80"
+    container_name: weather-backend-app
 
   weather-frontend-app:
     build:
-      context: ./src/app/Dockerfile
+      context: ./app
+      dockerfile: Dockerfile
     ports:
-     - "5001:80"
-    environment:
-      - "Endpoints:Backend=http://weather-backend-app:80"
+      - "3001:3000"
+    container_name: weather-frontend-app
     depends_on:
       - weather-backend-app

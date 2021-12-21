@@ -27,7 +27,7 @@ class App extends React.Component {
     const city = e.target.elements.city.value;
     const language = e.target.elements.language.value;
     const unit = e.target.elements.unit.value;
-    const api = "http://localhost:5000"
+    const api = "http://localhost:80"
 
     const apiCallForecast = await fetch(`${api}/Forecast?city=${city}&language=${language}&unit=${unit}`);    
     const dataForecast = await apiCallForecast.json();
