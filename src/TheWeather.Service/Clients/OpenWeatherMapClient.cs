@@ -65,7 +65,7 @@ namespace TheWeather.Service.Clients
             try
             {
                 if (responseMessage.StatusCode == HttpStatusCode.NotFound)
-                    throw new CityNotFoundException();
+                    throw new CityNotFoundException().DetailData("query", query);
 
                 if (!responseMessage.IsSuccessStatusCode)
                     throw new WeatherClientException();
