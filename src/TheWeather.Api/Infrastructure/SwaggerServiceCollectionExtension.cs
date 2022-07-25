@@ -28,7 +28,7 @@ namespace TheWeather.Api.Infrastructure
                 {
                     Version = "v1",
                     Title = "The weather Service API",
-                    Description = "Simple weather backend for Web Application",
+                    Description = "Simple weather backend for React Application",
                     License = new OpenApiLicense
                     {
                         Name = "Use under MIT licenses",
